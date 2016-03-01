@@ -7,6 +7,9 @@ class WordGuess
 
     # possible words, selected at random
     @csv_words = CSV.read("allwords.csv")
+    @csv_words.each do |arr|
+      arr.delete_at(0)
+    end
     @words = {
       "e" => @csv_words[1],
       "m" => @csv_words[0],
