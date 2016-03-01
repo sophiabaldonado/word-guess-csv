@@ -1,16 +1,16 @@
+require 'CSV'
+
 class WordGuess
   def initialize(debug = false)
     # are we in debug mode?
     @debug = debug
 
     # possible words, selected at random
+    @csv_words = CSV.read("allwords.csv")
     @words = {
-      "e" => %w(dog cat bug hat cap lit kin fan fin fun tan ten tin ton),
-      "m" => %w(plain claim brine crime alive bride skine drive slime stein jumpy),
-      "h" => %w(
-          machiavellian prestidigitation plenipotentiary quattuordecillion
-          magnanimous unencumbered bioluminescent circumlocution
-        )
+      "e" => @csv_words[1],
+      "m" => @csv_words[0],
+      "h" => @csv_words[2]
     }
 
     # players attempts allowed by difficulty
@@ -67,7 +67,7 @@ class WordGuess
       end_game(false)
     else # play another turn if we haven't won or lost
       play_turn
-    end 
+    end
   end
 
   private
